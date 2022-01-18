@@ -1,3 +1,11 @@
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Food, function (sprite, otherSprite) {
+    if (controller.B.isPressed()) {
+        sprite.destroy()
+        info.changeScoreBy(1)
+        score = "got"
+        info.stopCountdown()
+    }
+})
 info.onCountdownEnd(function () {
     if (score == "in") {
         mySprite2.destroy()
@@ -9,13 +17,37 @@ info.onCountdownEnd(function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     if (controller.A.isPressed()) {
-        otherSprite.destroy()
-        info.changeScoreBy(1)
-        score = "gone"
+        grab = "grab"
     }
 })
+let grab = ""
 let mySprite2: Sprite = null
 let score = ""
+game.showLongText("hi! I am andy will you help me save the nature?", DialogLayout.Top)
+game.showLongText("Use arrow keys or WASD to move the hook", DialogLayout.Bottom)
+game.showLongText("Press the A button or Q key to grab the garbage", DialogLayout.Bottom)
+game.showLongText("Take it to the purple bin and press B button or E key to drop the waste", DialogLayout.Bottom)
+game.showLongText("Be sure to do It before the count down ends", DialogLayout.Bottom)
+let level = 0
+let mySprite5 = sprites.create(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . b b b b b b b b b b b b b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b f f b f f b f f b f f b . 
+    . . b b b b f f b f f b b b b . 
+    . . . . . b b b b b b b . . . . 
+    . . . . . . . . . . . . . . . . 
+    `, SpriteKind.Food)
+mySprite5.setPosition(36, 20)
 let mySprite = sprites.create(img`
     . . . . . . f f f f . . . . . . 
     . . . . f f f 2 2 f f f . . . . 
@@ -176,9 +208,16 @@ scene.setBackgroundImage(img`
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
     `)
-let level = 0
 controller.moveSprite(mySprite3, 50, 50)
-game.onUpdateInterval(5000, function () {
+game.onUpdate(function () {
+    if (grab == "grab") {
+        mySprite2.setPosition(mySprite3.x, mySprite3.y)
+        if (controller.B.isPressed()) {
+            grab = "qe"
+        }
+    }
+})
+game.onUpdateInterval(10000, function () {
     mySprite2 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . f f f f f . . . . . 
@@ -199,6 +238,6 @@ game.onUpdateInterval(5000, function () {
         `, SpriteKind.Projectile)
     score = "in"
     mySprite2.setPosition(randint(0, 150), randint(36, 113))
-    info.startCountdown(4)
+    info.startCountdown(7)
     mySprite3.setStayInScreen(true)
 })
