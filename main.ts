@@ -180,22 +180,22 @@ let level = 0
 controller.moveSprite(mySprite3, 50, 50)
 game.onUpdateInterval(5000, function () {
     mySprite2 = sprites.create(img`
-        . . . . . . f f f f . . . . . . 
-        . . . . b f 3 f 3 f b b . . . . 
-        . . . f f 3 f 3 f 1 1 f c . . . 
-        . . c f f 3 f 3 3 1 f f f f . . 
-        . c f 1 f 1 f 3 f 3 1 f f c c . 
-        c c d f f 1 f 3 3 3 3 f f f c c 
-        f b f d 1 f 3 f 3 f 1 1 1 f f c 
-        f b f b f 3 1 f f 3 1 1 d d b c 
-        c f f f f f f f f f f f f d b c 
-        . c b b f f f f f f f f f b c . 
-        . . c c b f f f f f f b c c . . 
-        . . . . c c c c f c c c . . . . 
-        . . . . . . b f f b . . . . . . 
-        . . . . . . b 1 f b b . . . . . 
-        . . . . . b b f f 1 b . . . . . 
-        . . . . . b f f 1 1 b . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . f f f f f . . . . . 
+        . . . . . f f f f f f . . . . . 
+        . . . . f f f 7 f f . . . . . . 
+        . . . f f f e e f f . . . . . . 
+        . . f f f f f f f f f f f . . . 
+        . f f f e e 4 f e e 7 f f f . . 
+        . . f f f 2 f f f f f f f f f . 
+        . . f f f f f e e f f e 7 f f . 
+        . f f e e f f e e 2 f e f f . . 
+        . f f f f f f f f f f f f f . . 
+        1 f f f f f f f f e e f f f . . 
+        . . f f e e 7 f f f f f f f . . 
+        . . . f e e f 7 e f f f f . . . 
+        . . . . f f f f e f f f . . . . 
+        . . . . . . . . . . . . . . . . 
         `, SpriteKind.Projectile)
     score = "in"
     mySprite2.setPosition(randint(0, 150), randint(36, 113))
